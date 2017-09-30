@@ -5,10 +5,10 @@ import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
 import CoursesPage from './components/course/CoursesPage';
 import ManageCoursePage from './components/course/ManageCoursePage';
-import itemRow from './components/itemRow';
+import Cart from './components/Cart';
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={itemRow} />
+        <IndexRoute component={Cart} />
         <Route path="home" component={HomePage} />
         <Route path="courses" component={CoursesPage} />
         <Route path="course" component={ManageCoursePage} />
