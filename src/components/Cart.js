@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import ItemRow from './ItemRow';
+import ItemList from './ItemList';
 
 class Cart extends React.Component {
     constructor(props, context) {
@@ -18,9 +18,10 @@ class Cart extends React.Component {
                     value="Add Course"
                     className="btn btn-primary"
                     onClick={this.redirectToAddCoursePage} />
-                <ul className="list-group">
-                    {[1, 2, 3, 4].map((i) => <ItemRow key={i} />)}
-                </ul>
+                <div className="row">
+                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList />}</div>
+                    <div className="col-sm-4 col-md-4 col-lg-4">Cart summary</div>
+                </div>
             </div>
         );
     }

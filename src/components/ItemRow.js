@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 
 const ItemRow = () => {
     return (
-        <li className="list-group-item">
-            <label>item name</label>
-            <input type="button" className="btn btn-danger" value= "remove"/>
-            <input type="number" value = "quanity"/>
-            <label>Final amount2</label>
-        </li >
+        <tr>
+            <td><label>item name</label></td>
+            <td><input type="number" value="quanity" /></td>
+            <td><input type="button" className="btn btn-sm btn-danger" value="remove" /></td>
+            <td><label>Final amount2</label></td>
+        </tr>
     );
 };
 
