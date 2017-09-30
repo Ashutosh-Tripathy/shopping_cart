@@ -40,6 +40,7 @@ CoursesPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     return {
         courses: state.courses
     };

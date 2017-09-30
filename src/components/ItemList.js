@@ -1,22 +1,30 @@
 import ItemRow from './ItemRow';
 import React, { PropTypes } from 'react';
 
-const ItemList = () => {
+const ItemList = ({ items }) => {
+    debugger;
     return (
         <div className="table-responsive">
             <table className="table table-striped">
                 <thead>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Remove</th>
-                    <th>Amount</th>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Remove</th>
+                        <th>Amount</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    {[1, 2, 3, 4].map((i) => <ItemRow key={i} />)}
+                    {items.map((i, j) => <ItemRow key={j} />)}
                 </tbody>
             </table>
         </div>
     );
 };
+
+ItemList.propTypes = {
+    items: PropTypes.array.isRequired
+};
+
 
 export default ItemList;

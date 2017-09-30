@@ -11,6 +11,8 @@ class Cart extends React.Component {
     }
 
     render() {
+        debugger;
+        const { items } = this.props;
         return (
             <div>
                 <h1>Courses</h1>
@@ -19,7 +21,7 @@ class Cart extends React.Component {
                     className="btn btn-primary"
                     onClick={this.redirectToAddCoursePage} />
                 <div className="row">
-                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList />}</div>
+                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={items} />}</div>
                     <div className="col-sm-4 col-md-4 col-lg-4">Cart summary</div>
                 </div>
             </div>
@@ -27,4 +29,20 @@ class Cart extends React.Component {
     }
 }
 
-export default Cart;
+
+Cart.propTypes = {
+    items: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    debugger;
+    return {
+        items: state.items
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
