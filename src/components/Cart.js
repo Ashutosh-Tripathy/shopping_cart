@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import ItemList from './ItemList';
 import CartSummary from './CartSummary';
+import toastr from 'toastr';
 
 class Cart extends React.Component {
     constructor(props, context) {
@@ -24,10 +25,10 @@ class Cart extends React.Component {
 
     deleteItem(event) {
         let items = this.props.state.items;
-        for (var i = items.length - 1; i >= 0; i--) {
+        for (let i = items.length - 1; i >= 0; i--) {
             if (items[i].id == event.target.id) items.splice(i, 1);
         }
-        debugger;
+        toastr.success('Course deleted');        
         return this.setState({ items: items });
     }
     render() {
