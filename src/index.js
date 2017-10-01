@@ -9,8 +9,6 @@ import { Provider } from 'react-redux';
 import routes from './routes';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { loadCourses } from './actions/courseAction';
-import { loadAuthors } from './actions/authorAction';
 import { loadItems } from './actions/itemAction';
 import '../node_modules/toastr/build/toastr.min.css';
 
