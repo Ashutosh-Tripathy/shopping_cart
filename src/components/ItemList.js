@@ -1,7 +1,8 @@
 import ItemRow from './ItemRow';
 import React, { PropTypes } from 'react';
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, onQuantityChange }) => {
+    debugger;
     return (
         <div className="table-responsive">
             <table className="table table-striped">
@@ -15,7 +16,7 @@ const ItemList = ({ items }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((item, j) => <ItemRow item = {item} key={j} />)}
+                    {items.map((item, j) => <ItemRow key={j} item={item} onQuantityChange={onQuantityChange} />)}
                 </tbody>
             </table>
         </div>
@@ -23,7 +24,8 @@ const ItemList = ({ items }) => {
 };
 
 ItemList.propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    onQuantityChange: PropTypes.func.isRequired
 };
 
 
