@@ -8,7 +8,6 @@ import CartSummary from './CartSummary';
 class Cart extends React.Component {
     constructor(props, context) {
         super(props, context);
-        debugger;
         this.state = {
             items: Object.assign({}, this.props.state.items)
         };
@@ -16,7 +15,6 @@ class Cart extends React.Component {
     }
 
     updateItemQuantity(event) {
-        debugger;
         const field = event.target.name;
         let items = this.props.state.items;
         items.filter(item => item.id == event.target.id)[0][field] = event.target.value;
@@ -31,7 +29,7 @@ class Cart extends React.Component {
                 <h1>Cart</h1>
                 <div className="row">
                     <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={this.props.state.items} onQuantityChange={this.updateItemQuantity} />}</div>
-                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary />}</div>
+                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary items = {this.props.state.items} />}</div>
                 </div>
             </div>
         );

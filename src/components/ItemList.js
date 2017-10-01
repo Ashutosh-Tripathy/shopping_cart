@@ -2,7 +2,6 @@ import ItemRow from './ItemRow';
 import React, { PropTypes } from 'react';
 
 const ItemList = ({ items, onQuantityChange }) => {
-    debugger;
     return (
         <div className="table-responsive">
             <table className="table table-striped">
