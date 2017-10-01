@@ -12,6 +12,7 @@ class Cart extends React.Component {
             items: Object.assign({}, this.props.state.items)
         };
         this.updateItemQuantity = this.updateItemQuantity.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     updateItemQuantity(event) {
@@ -21,15 +22,22 @@ class Cart extends React.Component {
         return this.setState({ items: items });
     }
 
-
+    deleteItem(event) {
+        let items = this.props.state.items;
+        for (var i = items.length - 1; i >= 0; i--) {
+            if (items[i].id == event.target.id) items.splice(i, 1);
+        }
+        debugger;
+        return this.setState({ items: items });
+    }
     render() {
         const { state } = this.props;
         return (
             <div>
                 <h1>Cart</h1>
                 <div className="row">
-                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={this.props.state.items} onQuantityChange={this.updateItemQuantity} />}</div>
-                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary items = {this.props.state.items} />}</div>
+                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={this.props.state.items} onQuantityChange={this.updateItemQuantity} onDeleteItem={this.deleteItem} />}</div>
+                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary items={this.props.state.items} />}</div>
                 </div>
             </div>
         );

@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const CartSummary = ({ items }) => {
-    debugger;
     const ItemCount = items.length;
     const ItemPrice = items.reduce((x, y) => { return { price: x.price + y.price * (y.quantity || 1) }; }, { price: 0 }).price;
     const Discount = items.reduce((x, y) => { return { discount: x.discount + y.discount * (y.quantity || 1) }; }, { discount: 0 }).discount;

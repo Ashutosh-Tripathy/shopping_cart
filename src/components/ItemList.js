@@ -1,7 +1,7 @@
 import ItemRow from './ItemRow';
 import React, { PropTypes } from 'react';
 
-const ItemList = ({ items, onQuantityChange }) => {
+const ItemList = ({ items, onQuantityChange, onDeleteItem }) => {
     return (
         <div className="table-responsive">
             <table className="table table-striped">
@@ -15,7 +15,7 @@ const ItemList = ({ items, onQuantityChange }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((item, j) => <ItemRow key={j} item={item} onQuantityChange={onQuantityChange} />)}
+                    {items.map((item, j) => <ItemRow key={j} item={item} onQuantityChange={onQuantityChange} onDeleteItem={onDeleteItem} />)}
                 </tbody>
             </table>
         </div>
@@ -24,7 +24,8 @@ const ItemList = ({ items, onQuantityChange }) => {
 
 ItemList.propTypes = {
     items: PropTypes.array.isRequired,
-    onQuantityChange: PropTypes.func.isRequired
+    onQuantityChange: PropTypes.func.isRequired,
+    onDeleteItem: PropTypes.func.isRequired
 };
 
 
