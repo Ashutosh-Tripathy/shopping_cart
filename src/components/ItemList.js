@@ -2,7 +2,6 @@ import ItemRow from './ItemRow';
 import React, { PropTypes } from 'react';
 
 const ItemList = ({ items }) => {
-    debugger;
     return (
         <div className="table-responsive">
             <table className="table table-striped">
@@ -10,12 +9,13 @@ const ItemList = ({ items }) => {
                     <tr>
                         <th>Item Name</th>
                         <th>Quantity</th>
+                        <th>Price</th>
                         <th>Remove</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((i, j) => <ItemRow key={j} />)}
+                    {items.map((item, j) => <ItemRow item = {item} key={j} />)}
                 </tbody>
             </table>
         </div>

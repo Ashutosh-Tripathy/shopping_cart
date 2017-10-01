@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import ItemList from './ItemList';
+import CartSummary from './CartSummary';
 
 class Cart extends React.Component {
     constructor(props, context) {
@@ -11,18 +12,14 @@ class Cart extends React.Component {
     }
 
     render() {
-        debugger;
         const { items } = this.props;
         return (
             <div>
-                <h1>Courses</h1>
-                <input type="submit"
-                    value="Add Course"
-                    className="btn btn-primary"
-                    onClick={this.redirectToAddCoursePage} />
+                <h1>Cart</h1>
+                
                 <div className="row">
                     <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={items} />}</div>
-                    <div className="col-sm-4 col-md-4 col-lg-4">Cart summary</div>
+                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary />}</div>
                 </div>
             </div>
         );
@@ -35,7 +32,6 @@ Cart.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     return {
         items: state.items
     };
