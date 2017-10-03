@@ -12,19 +12,28 @@ class Cart extends React.Component {
         this.state = {
             items: this.props.items.slice()
         };
+        this.initialState = { items: [] };
         this.updateItemQuantity = this.updateItemQuantity.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.resetState = this.resetState.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState(() => ({ items: nextProps.items.slice() }));
+        if (this.initialState.items.length === 0) {
+            this.initialState.items = JSON.parse(JSON.stringify(nextProps.items));
+        }
+    }
+
+    resetState(event) {
+        this.setState(() => ({ items: this.initialState.items.slice() }));
     }
 
     updateItemQuantity(event) {
         let { id, name, value } = event.target;
-        toastr.success('Quantity updated');        
+        toastr.success('Quantity updated');
         return this.setState((prevState, props) => {
-            let items = prevState.items.slice();
+            let items = JSON.parse(JSON.stringify(prevState.items));
             items.map((item) => {
                 if (item.id == id) {
                     item[name] = value;
@@ -38,7 +47,7 @@ class Cart extends React.Component {
         let id = event.target.id;
         toastr.success('Item deleted');
         return this.setState((prevState, props) => {
-            return { items: prevState.items.filter(item => item.id != id) };
+            return { items: JSON.parse(JSON.stringify(prevState.items)).filter(item => item.id != id) };
         });
     }
 
@@ -46,7 +55,10 @@ class Cart extends React.Component {
         const { items } = this.state;
         return (
             <div>
-                <h1>Cart</h1>
+                <div>
+                    <h1>Cart</h1>
+                    <input type="button" value="reset" className="btn btn-warning" onClick={this.resetState} />
+                </div>
                 <div className="row">
                     <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={items} onQuantityChange={this.updateItemQuantity} onDeleteItem={this.deleteItem} />}</div>
                     <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary items={items} />}</div>
