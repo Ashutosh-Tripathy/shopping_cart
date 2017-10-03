@@ -10,35 +10,46 @@ class Cart extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            items: Object.assign({}, this.props.state.items)
+            items: this.props.items.slice()
         };
         this.updateItemQuantity = this.updateItemQuantity.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState(() => ({ items: nextProps.items.slice() }));
+    }
+
     updateItemQuantity(event) {
-        const field = event.target.name;
-        let items = this.props.state.items;
-        items.filter(item => item.id == event.target.id)[0][field] = event.target.value;
-        return this.setState({ items: items });
+        let { id, name, value } = event.target;
+        toastr.success('Quantity updated');        
+        return this.setState((prevState, props) => {
+            let items = prevState.items.slice();
+            items.map((item) => {
+                if (item.id == id) {
+                    item[name] = value;
+                }
+            });
+            return { items: items };
+        });
     }
 
     deleteItem(event) {
-        let items = this.props.state.items;
-        for (let i = items.length - 1; i >= 0; i--) {
-            if (items[i].id == event.target.id) items.splice(i, 1);
-        }
-        toastr.success('Course deleted');        
-        return this.setState({ items: items });
+        let id = event.target.id;
+        toastr.success('Item deleted');
+        return this.setState((prevState, props) => {
+            return { items: prevState.items.filter(item => item.id != id) };
+        });
     }
+
     render() {
-        const { state } = this.props;
+        const { items } = this.state;
         return (
             <div>
                 <h1>Cart</h1>
                 <div className="row">
-                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={this.props.state.items} onQuantityChange={this.updateItemQuantity} onDeleteItem={this.deleteItem} />}</div>
-                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary items={this.props.state.items} />}</div>
+                    <div className="col-sm-8 col-md-8 col-lg-8">{<ItemList items={items} onQuantityChange={this.updateItemQuantity} onDeleteItem={this.deleteItem} />}</div>
+                    <div className="col-sm-4 col-md-4 col-lg-4">{<CartSummary items={items} />}</div>
                 </div>
             </div>
         );
@@ -47,7 +58,7 @@ class Cart extends React.Component {
 
 
 Cart.propTypes = {
-    state: PropTypes.object.isRequired
+    items: PropTypes.array.isRequired
 };
 
 Cart.contextTypes = {
@@ -56,7 +67,7 @@ Cart.contextTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        state: state
+        items: state.items
     };
 }
 
