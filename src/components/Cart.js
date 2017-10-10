@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import ItemList from './ItemList';
 import CartSummary from './CartSummary';
 import toastr from 'toastr';
+toastr.options.preventDuplicates = true;
 
 class Cart extends React.Component {
     constructor(props, context) {
@@ -31,14 +32,19 @@ class Cart extends React.Component {
 
     updateItemQuantity(event) {
         let { id, name, value } = event.target;
-        toastr.success('Quantity updated');
+        if (value > 1000 || value.length > 3) {
+            toastr.warning("Reached maximum value/length");
+            return;
+        }
         return this.setState((prevState, props) => {
             let items = JSON.parse(JSON.stringify(prevState.items));
             items.map((item) => {
                 if (item.id == id) {
+                    if (item[name] == value) return;
                     item[name] = value;
                 }
             });
+            toastr.success('Quantity updated');
             return { items: items };
         });
     }
